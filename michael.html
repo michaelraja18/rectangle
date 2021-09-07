@@ -1,0 +1,41 @@
+<!DOCTYPE html/>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="500"></canvas>
+    <br />
+    <input type="button" onclick="DrawRectangle()" value="Draw Rectangles" />
+</body>
+ 
+  
+<script>
+  var rect = [];
+  var rowCount = 0,rectCount=0;
+  var x =10,y=10,w=150,h=100;
+  var context = document.getElementById('myCanvas').getContext('2d');
+  context.beginPath();
+  function DrawRectangle() {  
+    
+    if(rect.length===0){
+      rect.push({'x':x,'y':y,'w':w,'h':h})
+    } else {
+      console.log(rect.length,rect.length % 5)
+      if(rect.length % 5 === 0){
+        rowCount++;
+        y = (rowCount*h)+(rowCount*20)+10;
+        x=10;
+        rect.push({'x':x,'y':y,'h':h,'w':w})
+      } else {
+        x = rect[rectCount-1].x+w+20;
+        rect.push({'x':x,'y':y,'h':h,'w':w})
+      }
+    }
+    console.log(rect[rectCount])
+    context.strokeRect(rect[rectCount].x, rect[rectCount].y,  rect[rectCount].w,rect[rectCount].h);
+    rectCount++;  
+  }
+</script>
+</html>
